@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/style.css"/>
+    <title>Flash Card</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+          <div class="container">
+            <a class="navbar-brand" href="index.html">
+              <i class="fas fa-book-open"></i>
+                Quiz
+              </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">New Card</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="card.html" onclick="showFlashCard()">Card</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="practice.html">Practice</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </nav>
+  </header>
+
+    <!-- <div class="create-box hide">
+      <h2 style="text-align: center; color: black">Edit Cardd</h2>
+      <form>
+          <label for="question">Question</label>
+          <textarea id="question"></textarea>
+          <br>
+          <label for="answer">Answer</label>
+          <textarea id="answer"></textarea>
+          <div>
+            <button id="saveButton" type="submit">Save</button>
+          </div>
+        </form>
+  </div> -->
+
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div id="flashCards" class="mx-auto slider">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script>
+        
+      function showFlashCard() {
+        let flashCard = document.querySelector("#flashCards");
+        let contentArray = localStorage.getItem("items")
+          ? JSON.parse(localStorage.getItem("items"))
+          : [];
+
+        let html = "";
+        contentArray.forEach((element, index) => {
+          html += `
+        <div id="flashCard">
+            <h3 class="question"> ${element.my_question}</h3>
+            <div>
+            <p class="answer"> ${element.my_answer}</p>
+            <div>
+            </div>
+            </div>
+        </div>
+        `;
+        });
+        contentArray.length > 0
+          ? (flashCard.innerHTML = html)
+          : (flashCard.innerHTML = `No card available! Please add Card.`);
+        // console.log(html);
+      }
+      showFlashCard();
+
+
+
+      $('.slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        autoplay: true,
+        });
+    </script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
